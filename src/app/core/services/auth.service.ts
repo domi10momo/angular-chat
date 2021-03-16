@@ -9,21 +9,6 @@ export class AuthService {
     this.afAuth.onAuthStateChanged((user) => console.log(user));
   }
 
-  create(email: string, password: string): Promise<void> {
-    return this.afAuth
-      .createUserWithEmailAndPassword(email, password)
-      .then((credential) => {
-        const { user } = credential;
-        const actionCodeSettings = {
-          url: `http://localhost:4200/?newAccount=true&email=${user.email}`,
-        };
-        user.sendEmailVerification(actionCodeSettings);
-      });
-  }
-  //authService.create(email, password)
-  //.then((credential) => credential)
-  //.catch((error) => error)
-
   login(
     email: string,
     password: string
